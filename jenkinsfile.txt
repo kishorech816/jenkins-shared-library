@@ -1,0 +1,27 @@
+@Library('utils') _
+
+pipeline {
+    agent none
+    environment {
+        FOO = 'bar'
+    }
+    stages {
+    stage ('Example') {
+        steps {
+            // log.info 'Starting' 
+            script { 
+                logs.info 'Starting'
+                logs.warning 'Nothing to do!'
+                echo "Database engine is ${FOO}"
+            }
+        }
+    }
+    stage('Build') {
+        steps {
+            script {
+                buildImage()
+            }
+        }
+    }    
+    }
+}
